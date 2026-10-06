@@ -192,7 +192,7 @@ P_parasite = (rho_SSL*C_dp_clean*A_D*V_f^3)/2 + sum( (rho_SSL.*transpose(C_dp_ex
 Pf_minus_Pm = P_induced + P_profile + P_parasite;
 Pf = Pf_minus_Pm * (1 + misc_power);
 
-%% Refinement and Iteration
+%% Stage 8: Refinement and Iteration
 
 % Power requirements check
 if Pf < P_i
@@ -209,6 +209,7 @@ elseif Pf > P_i
 else
     fprintf('\nPf is equal to Pi.\n');
 end
+
 
 %% Output Parameters
 
