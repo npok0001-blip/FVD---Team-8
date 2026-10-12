@@ -110,7 +110,7 @@ W_g_Force = W_g * g; % gross weight (N)
 D_v = 0.3 * D_L_Force * A_p; % Vertical Drag (N)
 
 %% Stage 5: Main Rotor System
-A_D = (W_g_Force + D_v)/(D_L_Force*2); % Rotor area (m^2)
+A_D = (W_g_Force + D_v)/(D_L_Force); % Rotor area (m^2)
 R = sqrt(A_D/pi); % Rotor radius (m)
 
 omega = V_T/R; % Rotation speed of rotor (rad/s)
@@ -236,7 +236,7 @@ fprintf('Ideal thrust upper bound: %.1f N\n', P_t/V_max);
 
 figure(2)
 clf
-plot(r_range, T_log, 'LineWidth', 1.5)
+% plot(r_range, T_log, 'LineWidth', 1.5)
 hold on
 yline(drag, '--', 'Required thrust')
 xlabel('Propeller radius (m)')

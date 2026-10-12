@@ -38,29 +38,28 @@ a_sound = 343; % speed of sound (m/s) (taken at SSL)
 
 % Stage 1: Weight and Power
 g = 9.81; % Gravitational acceleration (m/s^2)
-P_i = 5*10^6; % Engine Rating (W)
+P_i = 2504*10^3; % Engine Rating (W)
 PSFC = 0.24/(3.6e6); % Power specific fuel consumption (kg/W/s) {3.6 is a conversion factor}
 % Stage 2:
-mission_time = 3*60*60; % Mission time (s)
+mission_time = 1.5*60*60; % Mission time (s)
 % Stage 3:
-W_ms_ext = 185; % external mission system weight (kg)
 %NOTE: You could link this variable to external_components below and calculate weight
-W_ms_int = 566; % internal mission system weight (kg)
-W_c = 362; % Crew weight (kg)
-W_p = 900; % Personnel weight (kg)
-W_u_to_W_g = 0.55; % Useful weight to gross weight ratio. Rule of thumb from lecture slides
+W_ms_int = 400; % internal mission system weight (kg)
+W_c = 200; % Crew weight (kg)
+W_p = 1200; % Personnel weight (kg)
+W_u_to_W_g = 0.44; % Useful weight to gross weight ratio. Rule of thumb from lecture slides
 % Stage 4:
-A_p = 60; % Projected area (m^2)
-D_L = 58.59; % Disk Loading (kg/m^2), Note a multiplication with g has been included to convert to N. Which is required for later equations to work
-D_L_Force = 58.59*g; % Disk Loading (kg/m^2), Note a multiplication with g has been included to convert to N. Which is required for later equations to work
+A_p = 25; % Projected area (m^2)
+D_L = 45; % Disk Loading (kg/m^2), Note a multiplication with g has been included to convert to N. Which is required for later equations to work
+D_L_Force = D_L*g; % Disk Loading (N/m^2), This is required for later equations to work
 
 % Stage 5:
-mu = 0.4; % advance ratio
-V_T = 0.65*a_sound; % prescribe a maximum allowable tip speed (m/s)
+mu = 0.3864; % advance ratio
+V_T = 220; % prescribe a maximum allowable tip speed (m/s)
 rho_SSL = 1.225; % air density at SSL (kg/m^3)
 dynamic_viscosity = 1.789 * 10^-5; % (Pa/s) at SSL
 R_to_c = 18; % radius to chord ratio
-C_T_to_sigma = 0.17; % thrust coefficient to solidity ratio
+C_T_to_sigma = 0.10; % thrust coefficient to solidity ratio
 % Stage 6:
 k = 0.00000818; % Parasite Drag Gross Weight (less mission system external) Constant
 Re_inf = 5e6; % Reynolds number in forward flight. Note: I am unsure whether Reynolds number should be calculated for each
@@ -80,15 +79,17 @@ end
 % component name, diameter (m), length (m), weight (kg)
 external_components = {
      % Name                                  Diameter (m)   Length (m)   Weight (kg) 
-    'Night sun',                               0.55,         0.51,        19;
-    'Tail Rotor flood light',                  0.16,         0.06,        0.9;
-    'Spotlights',                              0.01,         0.54,        0.9;
-    'Rescue Hoist',                            0.52,         0.45,        28.6;
+    % 'Night sun',                               0.55,         0.51,        19;
+    % 'Tail Rotor flood light',                  0.16,         0.06,        0.9;
+    % 'Spotlights',                              0.01,         0.54,        0.9;
+    % 'Rescue Hoist',                            0.52,         0.45,        28.6;
     % % Name                                  Diameter (m)   Length (m)   Weight (kg)
     % 'WESCAM MX-10 camera turret proxy',        0.254,         0.356,        17.2;
     % 'TrakkaBeam A800 searchlight proxy',       0.417,         0.478,        17.9;
     % 'Goodrich external rescue hoist',          0.311,         0.848,        48.0;
 }; % I HAVE COMMMENTED THESE OUT FOR NOW AS I AM NOT SURE HOW TO TREAT REYNOLDS NUMBER FOR CALCULATION OF SKIN FRICTION FOR COMPONENTS
+% W_ms_ext = external_components{:,4}; % external mission system weight (kg)
+W_ms_ext = 100; % external mission system weight (kg)
 
 % Stage 7:
 misc_power = 0.15; % miscellaneous power requirements
